@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders App.js correctly 1`] = `
+<div>
+  <div>
+    <section>
+      <h1>
+        <a
+          href="https://fontmeme.com/pokemon-font/"
+        >
+          <img
+            alt="pokemon-font"
+            border="0"
+            src="https://fontmeme.com/permalink/200213/54094a75ad0cab6a2805fe58ea555d47.png"
+          />
+        </a>
+      </h1>
+    </section>
+  </div>
+  <div>
+    <main>
+      <section
+        className="options"
+      >
+        <select
+          className="pokemon-filter"
+          onChange={[Function]}
+        >
+          <option
+            value="defaultValue"
+          >
+            What's your POkemon?
+          </option>
+          <option
+            value="grass"
+          >
+            Grass
+          </option>
+          <option
+            value="fire"
+          >
+            Fire
+          </option>
+          <option
+            value="water"
+          >
+            Water
+          </option>
+        </select>
+      </section>
+      <section
+        className="list-section"
+      >
+        <ul
+          className="pokemons"
+        />
+      </section>
+    </main>
+  </div>
+</div>
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders App.js correctly 1`] = `
+<div>
+  <section>
+    <h1>
+      <a
+        href="https://fontmeme.com/pokemon-font/"
+      >
+        <img
+          alt="pokemon-font"
+          border="0"
+          src="https://fontmeme.com/permalink/200213/54094a75ad0cab6a2805fe58ea555d47.png"
+        />
+      </a>
+    </h1>
+  </section>
+</div>
+`;
