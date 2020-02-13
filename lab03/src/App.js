@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js';
-import PokeList from './pokeList';
+import PokeList from './PokeList';
 import request from 'superagent';
 
 export default class App extends Component {
