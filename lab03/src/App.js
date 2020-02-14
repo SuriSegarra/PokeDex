@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Header.js';
-import PokeList from './PokeList';
+import Header from './components/Header.js';
+import PokeList from './components/PokeList.js';
 import request from 'superagent';
 
 export default class App extends Component {
@@ -10,10 +10,13 @@ export default class App extends Component {
   }
   async componentDidMount() {
     const data = await request.get('https://alchemy-pokedex.herokuapp.com/api/pokedex')
-    
+
     this.setState({data:data.body.results})
+
+
   }
   render(){
+    console.log(this.state)
     return (
       <div>
         <Header/>
