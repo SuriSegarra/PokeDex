@@ -3,28 +3,64 @@ import PokeItem from './PokeItem.js';
 // import pokemons from './data.js';
 
 export default class PokeList extends Component {
-    state = { selected: null }; 
+    state = { typeSelected: null, nameNotNull: null, filterType: null }; 
     render() {
 
-        const mappedPokemon = this.props.pokemons.filter (pokemon => {
-            if(!this.state.selected) return true;
+        let mappedPokemonType = this.props.pokemons.filter (pokemon => {
+            console.log(this.state)
+            if(!this.state.typeSelected) return true;
+            console.log(this.state)
+            return pokemon.type_1 === this.state.typeSelected;
 
-            return pokemon.type_1 === this.state.selected;
-            
         })
         .map( pokemon => {
             return <PokeItem pokemon={pokemon}/>
         });
 
-        const handdleChange = e => {
-            this.setState({ selected: e.target.value});
+        let mappedPokemonName = this.props.pokemons.filter (pokemon => {
+            if(!this.state.nameNotNull) return true;
+            return pokemon.type_1 === this.state.typeSelected;
+        })
+        .map( pokemon => {
+            return <PokeItem pokemon={pokemon}/>
+        });
+
+        const handleTypeChange = e => {
+            this.setState({ typeSelected: e.target.value});
         };
+        const handleNameChange = e => {
+            this.setState({ typeSelected: e.target.value});
+        };
+
+        const filterPoke = (filterType) => {
+            let mappedPokemon 
+            if (filterType === 'name') {
+
+                mappedPokemon =  mappedPokemonName 
+            }
+            else if (filterType === 'type_1') {
+                mappedPokemon = mappedPokemonType
+            }
+
+            return mappedPokemon
+        }
+
         return (
             <div>
                 <main>
+                    <button onClick={() => {
+                        this.setState({...this.state, filterType:'name'})
+                    }}>name</button>
+                    <button onClick={() =>{
+                        this.setState({...this.state, filterType:'type_1'})
+                    }}>Type</button>
                     <section className='options'>
-                        <select className='pokemon-filter' onChange={handdleChange}>
-                            <option value= 'defaultValue'>What's your POkemon?</option>
+                        <label>
+                            Name: 
+                            <input type='text' name='name'/>
+                        </label>
+                        <select className='pokemon-filter' onChange={handleTypeChange}>
+                            <option value={this.state.typeSelected}>What's your Pokemon?</option>
                             <option value='grass'>Grass</option>
                             <option value='fire'>Fire</option>
                             <option value='water'>Water</option>
@@ -32,7 +68,7 @@ export default class PokeList extends Component {
                     </section>
 
                     <section className='list-section'>
-                        <ul className='pokemons'>{mappedPokemon}</ul>
+                        <ul className='pokemons'>{filterPoke(this.state.filterType)}</ul>
                     </section>
                 </main>
             </div>

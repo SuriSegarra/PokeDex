@@ -20,7 +20,7 @@ export default class App extends Component {
     return (
       <div>
         <Header/>
-        <PokeList pokemons= {this.state.data}/>
+        <PokeList pokemons={this.state.data}/>
         
       
         
