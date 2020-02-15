@@ -3,7 +3,7 @@ import PokeItem from './PokeItem.js';
 // import pokemons from './data.js';
 
 export default class PokeList extends Component {
-    state = { typeSelected: null, nameNotNull: null, filterType: null }; 
+    state = { typeSelected: null, nameSearch: null, filterType: null }; 
     render() {
 
         let mappedPokemonType = this.props.pokemons.filter (pokemon => {
@@ -18,8 +18,8 @@ export default class PokeList extends Component {
         });
 
         let mappedPokemonName = this.props.pokemons.filter (pokemon => {
-            if(!this.state.nameNotNull) return true;
-            return pokemon.type_1 === this.state.typeSelected;
+            if(!this.state.nameSearch) return true;
+            return pokemon.pokemon === this.state.nameSearch;
         })
         .map( pokemon => {
             return <PokeItem pokemon={pokemon}/>
@@ -29,7 +29,7 @@ export default class PokeList extends Component {
             this.setState({ typeSelected: e.target.value});
         };
         const handleNameChange = e => {
-            this.setState({ typeSelected: e.target.value});
+            this.setState({ nameSearch: e.target.value});
         };
 
         const filterPoke = (filterType) => {
@@ -57,7 +57,7 @@ export default class PokeList extends Component {
                     <section className='options'>
                         <label>
                             Name: 
-                            <input type='text' name='name'/>
+                            <input type='text' name='name' onChange={handleNameChange}/>
                         </label>
                         <select className='pokemon-filter' onChange={handleTypeChange}>
                             <option value={this.state.typeSelected}>What's your Pokemon?</option>
