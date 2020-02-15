@@ -3,9 +3,18 @@ import PokeItem from './PokeItem.js';
 import Page from './Page.js';
 
 export default class PokeList extends Component {
-    state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [] }; 
-    render() {
+    constructor(props){
+        super(props)
+        this.state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [], page:0 };
 
+    }
+
+    render() {
+        let increment = () => {
+            console.log('state', this.state)
+            let nextPage = this.state.page + 1
+            this.setState({...this.state, page: nextPage })
+        }
         let mappedPokemonType = this.props.pokemons.filter (pokemon => {
             // console.log(this.state)
             if(!this.state.typeSelected) return true;
@@ -41,16 +50,16 @@ export default class PokeList extends Component {
             else if (filterType === 'type_1') {
                 mappedPokemon = mappedPokemonType
             }
-            console.log("filter type",filterType)
+            // console.log("filter type",filterType)
             this.setState({...this.state, currentPokemonArr: mappedPokemon})
-            console.log(mappedPokemon)
+            // console.log(mappedPokemon)
             return mappedPokemon
         }
         
         let currentPokemon = () => {
-            console.log(this.state.currentPokemonArr)
+            // console.log(this.state.currentPokemonArr)
             if (this.state.currentPokemonArr) {
-                return this.state.currentPokemonArr[0]
+                return this.state.currentPokemonArr[this.state.page]
             } else {
                 return null;
             }
@@ -61,11 +70,11 @@ export default class PokeList extends Component {
             <div>
                 <main>
                     <button onClick={() => {
-                        this.setState({...this.state, filterType: 'name'})
+                        // this.setState({...this.state, filterType: 'name'})
                         filterPoke('name');
                     }}>name</button>
                     <button onClick={() =>{
-                        this.setState({...this.state, filterType:'type_1'})
+                        // this.setState({...this.state, filterType:'type_1'})
                         filterPoke('type_1');
                     }}>Type</button>
                     <section className='options'>
@@ -85,7 +94,7 @@ export default class PokeList extends Component {
                         <ul className='pokemons'>{currentPokemon()}</ul>
                         
                     </section>
-                    <Page/>
+                    <Page nextPage={increment}/>
                 </main>
             </div>
         )
