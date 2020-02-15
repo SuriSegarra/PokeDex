@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PokeItem from './PokeItem.js';
-// import pokemons from './data.js';
+import Page from './Page.js';
 
 export default class PokeList extends Component {
-    state = { typeSelected: null, nameSearch: null, filterType: null }; 
+    state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [] }; 
     render() {
 
         let mappedPokemonType = this.props.pokemons.filter (pokemon => {
-            console.log(this.state)
+            // console.log(this.state)
             if(!this.state.typeSelected) return true;
-            console.log(this.state)
+            // console.log(this.state)
             return pokemon.type_1 === this.state.typeSelected;
 
         })
@@ -26,10 +26,10 @@ export default class PokeList extends Component {
         });
 
         const handleTypeChange = e => {
-            this.setState({ typeSelected: e.target.value});
+            this.setState({...this.state, typeSelected: e.target.value});
         };
         const handleNameChange = e => {
-            this.setState({ nameSearch: e.target.value});
+            this.setState({ ...this.state, nameSearch: e.target.value});
         };
 
         const filterPoke = (filterType) => {
@@ -41,18 +41,32 @@ export default class PokeList extends Component {
             else if (filterType === 'type_1') {
                 mappedPokemon = mappedPokemonType
             }
-
+            console.log("filter type",filterType)
+            this.setState({...this.state, currentPokemonArr: mappedPokemon})
+            console.log(mappedPokemon)
             return mappedPokemon
         }
+        
+        let currentPokemon = () => {
+            console.log(this.state.currentPokemonArr)
+            if (this.state.currentPokemonArr) {
+                return this.state.currentPokemonArr[0]
+            } else {
+                return null;
+            }
+        }
 
+        // let currentPokemon = this.state.currentPokemonArr[0] ? this.state.currentPokemonArr[0] : null
         return (
             <div>
                 <main>
                     <button onClick={() => {
-                        this.setState({...this.state, filterType:'name'})
+                        this.setState({...this.state, filterType: 'name'})
+                        filterPoke(this.state.filterType);
                     }}>name</button>
                     <button onClick={() =>{
                         this.setState({...this.state, filterType:'type_1'})
+                        filterPoke(this.state.filterType);
                     }}>Type</button>
                     <section className='options'>
                         <label>
@@ -68,8 +82,10 @@ export default class PokeList extends Component {
                     </section>
 
                     <section className='list-section'>
-                        <ul className='pokemons'>{filterPoke(this.state.filterType)}</ul>
+                        <ul className='pokemons'>{currentPokemon()}</ul>
+                        
                     </section>
+                    <Page/>
                 </main>
             </div>
         )
