@@ -5,7 +5,7 @@ import Page from './Page.js';
 export default class PokeList extends Component {
     constructor(props){
         super(props)
-        this.state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [], page:0 };
+        this.state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [], page:0,experienceSelected: null};
 
     }
 
@@ -38,12 +38,22 @@ export default class PokeList extends Component {
         .map( pokemon => {
             return <PokeItem pokemon={pokemon}/>
         });
+        let mappedPokemonExperience = this.props.pokemons.filter (pokemon => {
+            if(!this.state.experienceSelected) return true;
+            return pokemon.base_experience >= this.state.experienceSelected;
+        })
+        .map( pokemon => {
+            return <PokeItem pokemon={pokemon}/>
+        });
 
         const handleTypeChange = e => {
             this.setState({...this.state, typeSelected: e.target.value});
         };
         const handleNameChange = e => {
             this.setState({ ...this.state, nameSearch: e.target.value});
+        };
+        const handleExperienceChange = e => {
+            this.setState({ ...this.state, experienceSelected: e.target.value});
         };
 
         const filterPoke = (filterType) => {
@@ -85,6 +95,9 @@ export default class PokeList extends Component {
                         // this.setState({...this.state, filterType:'type_1'})
                         filterPoke('type_1');
                     }}>Type</button>
+                    <button onClick={() => {
+                        filterPoke('base_experience');
+                    }}>Experience</button>
                     <section className='options'>
                         <label>
                             Name: 
@@ -95,6 +108,11 @@ export default class PokeList extends Component {
                             <option value='grass'>Grass</option>
                             <option value='fire'>Fire</option>
                             <option value='water'>Water</option>
+                        </select>
+                        <select className='pokemon-filter' onChange={handleExperienceChange}>
+                            <option value='50'>Greater than 50 xp</option>
+                            <option value='100'>Greater than  100 xp</option>
+                            <option value='250'>Greater than 250 xp</option>
                         </select>
                     </section>
 
