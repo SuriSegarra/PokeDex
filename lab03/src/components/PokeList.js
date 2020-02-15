@@ -62,11 +62,11 @@ export default class PokeList extends Component {
                 <main>
                     <button onClick={() => {
                         this.setState({...this.state, filterType: 'name'})
-                        filterPoke(this.state.filterType);
+                        filterPoke('name');
                     }}>name</button>
                     <button onClick={() =>{
                         this.setState({...this.state, filterType:'type_1'})
-                        filterPoke(this.state.filterType);
+                        filterPoke('type_1');
                     }}>Type</button>
                     <section className='options'>
                         <label>
