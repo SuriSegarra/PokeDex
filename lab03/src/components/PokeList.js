@@ -5,7 +5,7 @@ import Page from './Page.js';
 export default class PokeList extends Component {
     constructor(props){
         super(props)
-        this.state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [], page:0,experienceSelected: null};
+        this.state = { typeSelected: null, nameSearch: null, filterType: null, currentPokemonArr: [], page:0,experienceSelected: null, heightSelected: null};
 
     }
 
@@ -45,6 +45,14 @@ export default class PokeList extends Component {
         .map( pokemon => {
             return <PokeItem pokemon={pokemon}/>
         });
+        let mappedPokemonHeight = this.props.pokemons.filter (pokemon => {
+            if(!this.state.heightSelected) return true;
+            console.log(pokemon.height, this.state.heightSelected)
+            return pokemon.height === parseInt(this.state.heightSelected);
+        })
+        .map (pokemon => {
+            return <PokeItem pokemon={pokemon}/>
+        });
 
         const handleTypeChange = e => {
             this.setState({...this.state, typeSelected: e.target.value});
@@ -55,6 +63,9 @@ export default class PokeList extends Component {
         const handleExperienceChange = e => {
             this.setState({ ...this.state, experienceSelected: e.target.value});
         };
+        const handleHeightChange = e => {
+            this.setState({...this.state, heightSelected: e.target.value});
+        }
 
         const filterPoke = (filterType) => {
             let mappedPokemon 
@@ -67,6 +78,10 @@ export default class PokeList extends Component {
             }
             else if(filterType === 'base_experience') {
                 mappedPokemon = mappedPokemonExperience
+            }
+            else if(filterType === 'height'){
+                // console.log('else if', mappedPokemonHeight)
+                mappedPokemon = mappedPokemonHeight
             }
             // console.log("filter type",filterType)
             this.setState({...this.state, currentPokemonArr: mappedPokemon})
@@ -99,6 +114,10 @@ export default class PokeList extends Component {
                         filterPoke('base_experience');
                     }}>Experience</button>
                     <button onClick={() => {
+                        filterPoke('height');
+                    }}>Height</button>
+                    
+                    <button onClick={() => {
 
                      let sortedPokemons = this.state.currentPokemonArr.slice()
                    
@@ -124,6 +143,10 @@ export default class PokeList extends Component {
                         <label>
                             Name: 
                             <input type='text' name='name' onChange={handleNameChange}/>
+                        </label>
+                        <label>
+                            Search Pokemon By Height (ft)
+                            <input type='text' name='height' onChange={handleHeightChange}/>
                         </label>
                         <select className='pokemon-filter' onChange={handleTypeChange}>
                             <option value={this.state.typeSelected}>What's your Pokemon?</option>
