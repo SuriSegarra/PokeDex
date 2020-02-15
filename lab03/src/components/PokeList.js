@@ -15,6 +15,11 @@ export default class PokeList extends Component {
             let nextPage = this.state.page + 1
             this.setState({...this.state, page: nextPage })
         }
+        let decrement = () => {
+            console.log('state', this.state)
+            let backPage = this.state.page - 1
+            this.setState({...this.state, page: backPage })
+        }
         let mappedPokemonType = this.props.pokemons.filter (pokemon => {
             // console.log(this.state)
             if(!this.state.typeSelected) return true;
@@ -49,6 +54,9 @@ export default class PokeList extends Component {
             }
             else if (filterType === 'type_1') {
                 mappedPokemon = mappedPokemonType
+            }
+            else if(filterType === 'base_experience') {
+                mappedPokemon = mappedPokemonExperience
             }
             // console.log("filter type",filterType)
             this.setState({...this.state, currentPokemonArr: mappedPokemon})
@@ -94,7 +102,7 @@ export default class PokeList extends Component {
                         <ul className='pokemons'>{currentPokemon()}</ul>
                         
                     </section>
-                    <Page nextPage={increment}/>
+                    <Page nextPage={increment} backPage={decrement}/>
                 </main>
             </div>
         )

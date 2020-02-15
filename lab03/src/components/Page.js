@@ -11,7 +11,7 @@ export default class Page extends Component {
         console.log(this.props)
         return (
             <div>
-                <button onClick={()=>{}}>Back</button>
+                <button onClick={()=>this.props.backPage()}>Back</button>
                 <button onClick={()=>this.props.nextPage()}>Next</button>
 
             </div>
