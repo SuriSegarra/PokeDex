@@ -98,6 +98,28 @@ export default class PokeList extends Component {
                     <button onClick={() => {
                         filterPoke('base_experience');
                     }}>Experience</button>
+                    <button onClick={() => {
+
+                     let sortedPokemons = this.state.currentPokemonArr.slice()
+                   
+                     sortedPokemons.sort((a, b) => {
+                         
+                         return a.props.pokemon.weight > b.props.pokemon.weight
+                        })
+                     this.setState({...this.state, currentPokemonArr: sortedPokemons})
+                    //  objs.sort((a, b) => a.last_nom.localeCompare(b.last_nom));
+                    }}>Sort by Size</button>
+
+                    <button onClick={() => {
+                        let sortedAttack = this.state.currentPokemonArr.slice()
+
+                        sortedAttack.sort((a,b) => {
+                            return a.props.pokemon.attack > b.props.pokemon.attack
+                        })
+                        this.setState({...this.state, currentPokemonArr: sortedAttack})
+                    }}>Sort by strength</button>
+
+                    
                     <section className='options'>
                         <label>
                             Name: 
