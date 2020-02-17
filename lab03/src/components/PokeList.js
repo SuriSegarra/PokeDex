@@ -149,7 +149,7 @@ export default class PokeList extends Component {
                             <input type='text' name='height' onChange={handleHeightChange}/>
                         </label>
                         <select className='pokemon-filter' onChange={handleTypeChange}>
-                            <option value={this.state.typeSelected}>What's your Pokemon?</option>
+                            <option value={this.state.typeSelected}>Type</option>
                             <option value='grass'>Grass</option>
                             <option value='fire'>Fire</option>
                             <option value='water'>Water</option>

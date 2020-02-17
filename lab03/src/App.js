@@ -21,9 +21,6 @@ export default class App extends Component {
       <div>
         <Header/>
         <PokeList pokemons={this.state.data}/>
-        
-      
-        
       </div>
     );
   }
