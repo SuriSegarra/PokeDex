@@ -80,12 +80,12 @@ export default class PokeList extends Component {
                 mappedPokemon = mappedPokemonExperience
             }
             else if(filterType === 'height'){
-                // console.log('else if', mappedPokemonHeight)
+              
                 mappedPokemon = mappedPokemonHeight
             }
-            // console.log("filter type",filterType)
+            
             this.setState({...this.state, currentPokemonArr: mappedPokemon})
-            // console.log(mappedPokemon)
+           
             return mappedPokemon
         }
         
@@ -103,7 +103,6 @@ export default class PokeList extends Component {
             <div>
                 <main>
                     <button onClick={() => {
-                        // this.setState({...this.state, filterType: 'name'})
                         filterPoke('name');
                     }}>name</button>
                     <button onClick={() =>{
