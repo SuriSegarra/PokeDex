@@ -16,6 +16,9 @@ export default class PokeItem extends Component {
                     src={this.props.pokemon.url_image}/>
                 </div>
                 <p className='attack'>{this.props.pokemon.attack}</p>
+                <div>
+                    <p className='experience'>{this.props.pokemon.base_experience}</p>
+                </div>
                 
             </li>
 

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import '../styles/header.css';
 
 export default class Header extends Component {
     render() {
         return <div>
-            <section>
+            <section className='header'>
                 <h1><a href="https://fontmeme.com/pokemon-font/"><img src="https://fontmeme.com/permalink/200213/54094a75ad0cab6a2805fe58ea555d47.png" alt="pokemon-font" border="0"/></a></h1>
+                <h1 className='sub-header'>Search a Pokemon!</h1>
             </section>
            
         </div>
